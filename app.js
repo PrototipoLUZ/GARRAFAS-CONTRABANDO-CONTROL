@@ -136,7 +136,7 @@ function render() {
     const v = vehs[a.id] || {};
     const d = document.createElement("div");
     d.className = "alerta";
-    d.innerHTML = "<strong>" + esc(fecha(a.ts)) + "</strong><span>Vehículo: " + esc(v.placa || a.id) +
+    d.innerHTML = "<strong>" + esc(fecha(a.utc ? a.utc + "Z" : a.ts)) + "</strong><span>Vehículo: " + esc(v.placa || a.id) +
       " · Se salió " + Math.round(a.desv || 0) + " m de la ruta</span><span>Responsable: " + esc(v.responsable || "—") +
       " · Tel: " + esc(v.telefono || "—") + "</span>";
     $("alertas").appendChild(d);
