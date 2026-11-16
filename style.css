@@ -1,0 +1,56 @@
+/* ===== CONFIGURACIÓN VISUAL: cambia estos valores ===== */
+:root{
+  --fuente:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --primario:#1f5eff; --ok:#12a36b; --adv:#f0a400; --alarma:#e5252a;
+  --sup:rgba(255,255,255,.95); --sup2:#eef2f7; --txt:#14202e; --suave:#5b6b7d; --linea:#d9e1ea;
+  --r:14px; --sombra:0 8px 28px rgba(15,30,50,.2);
+}
+@media (prefers-color-scheme:dark){:root{--sup:rgba(22,32,46,.95);--sup2:#223246;--txt:#eaf0f7;--suave:#9db0c4;--linea:#33475e}}
+
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{font-family:var(--fuente);color:var(--txt);overflow:hidden}
+#mapa{position:absolute;inset:0}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible{outline:3px solid var(--primario);outline-offset:2px}
+
+.barra{position:absolute;z-index:1200;top:calc(10px + env(safe-area-inset-top,0px));left:10px;right:10px;display:flex;align-items:center;gap:10px;padding:8px;background:var(--sup);border-radius:var(--r);box-shadow:var(--sombra);backdrop-filter:blur(8px)}
+.icono{width:40px;height:40px;border:0;border-radius:11px;background:var(--sup2);font-size:20px;flex:none}
+.marca{min-width:0;flex:1}
+.marca h1{margin:0;font-size:15px;line-height:1.2}
+.marca p{margin:0;font-size:12px;color:var(--suave)}
+.chip{display:flex;align-items:center;gap:7px;padding:6px 11px;border-radius:999px;background:var(--sup2);font-size:12.5px;font-weight:600;white-space:nowrap}
+.punto{width:10px;height:10px;border-radius:50%;background:var(--adv)}
+.chip.ok .punto{background:var(--ok)} .chip.mal .punto{background:var(--alarma)}
+
+.alarma{position:absolute;z-index:1300;top:calc(72px + env(safe-area-inset-top,0px));left:10px;right:10px;padding:13px 15px;background:var(--alarma);color:#fff;border-radius:var(--r);box-shadow:0 10px 34px rgba(229,37,42,.55);font-weight:700;line-height:1.35;animation:latido 1s ease-in-out infinite}
+.alarma[hidden]{display:none}
+@keyframes latido{50%{background:#8f1f1f}}
+@media (prefers-reduced-motion:reduce){.alarma{animation:none}}
+
+.lateral{position:absolute;z-index:1200;left:10px;top:calc(66px + env(safe-area-inset-top,0px));bottom:28px;width:min(370px,calc(100% - 20px));overflow-y:auto;display:grid;align-content:start;gap:18px;padding:14px;background:var(--sup);border-radius:var(--r);box-shadow:var(--sombra);backdrop-filter:blur(8px);transform:translateX(calc(-100% - 20px));visibility:hidden;transition:transform .25s,visibility .25s}
+.lateral.abierto{transform:none;visibility:visible}
+body.hay-alarma .lateral{top:calc(150px + env(safe-area-inset-top,0px))}
+@media (prefers-reduced-motion:reduce){.lateral{transition:none}}
+section{display:grid;gap:8px}
+h2{margin:0;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--suave)}
+.nota{margin:0;font-size:13px;line-height:1.4;color:var(--suave)}
+label{display:grid;gap:4px;font-size:12.5px;font-weight:600;color:var(--suave)}
+input{padding:10px 11px;border:1px solid var(--linea);border-radius:10px;background:var(--sup2);color:var(--txt);font:inherit;font-size:15px}
+.dos{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.botones{display:flex;flex-wrap:wrap;gap:8px}
+.sec{padding:8px 12px;border:1px solid var(--linea);border-radius:10px;background:none;font-size:13.5px;font-weight:600}
+.sec.activo{background:var(--adv);border-color:var(--adv);color:#1b1300}
+.principal{padding:12px;border:0;border-radius:10px;background:var(--primario);color:#fff;font-weight:700}
+
+.lista{display:grid;gap:8px}
+.veh,.alerta{display:grid;gap:2px;width:100%;padding:10px 12px;text-align:left;background:var(--sup2);border:0;border-left:6px solid var(--linea);border-radius:10px}
+.veh strong,.alerta strong{font-size:15px}
+.veh span,.alerta span{font-size:13px;color:var(--suave)}
+.veh.ok{border-left-color:var(--ok)} .veh.adv{border-left-color:var(--adv)} .veh.alerta{border-left-color:var(--alarma)}
+.alerta{border-left-color:var(--alarma)}
+.veh.sel{outline:2px solid var(--primario)}
+
+.pin span{display:block;width:24px;height:24px;border-radius:50%;border:3px solid #fff;background:#8a99a8;box-shadow:0 2px 8px rgba(0,0,0,.4)}
+.pin.ok span{background:var(--ok)} .pin.adv span{background:var(--adv)} .pin.alerta span{background:var(--alarma)}
+.leaflet-control-attribution{font-size:10px}

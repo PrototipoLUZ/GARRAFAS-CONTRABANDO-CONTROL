@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Control de rutas de garrafas · El Alto</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="mapa"></div>
+
+<header class="barra">
+  <button id="menu" class="icono" type="button" aria-label="Abrir panel" aria-expanded="false">☰</button>
+  <div class="marca"><h1>Control de rutas de garrafas</h1><p>El Alto · seguimiento en vivo</p></div>
+  <div class="chip" id="chip"><span class="punto"></span><span id="estado">Conectando…</span></div>
+</header>
+
+<div id="alarma" class="alarma" role="alert" hidden></div>
+
+<aside class="lateral" id="lateral">
+  <section>
+    <h2>Vehículos</h2>
+    <div id="lista" class="lista"><p class="nota">Aún no hay vehículos registrados.</p></div>
+  </section>
+
+  <section>
+    <h2>Registrar vehículo y ruta</h2>
+    <p class="nota">Escribe los datos, traza la ruta del punto A al punto B tocando el mapa y guarda.</p>
+    <label>ID del equipo (minúsculas, igual al del ESP32)<input id="vId" placeholder="garrafa1" autocomplete="off"></label>
+    <label>Placa<input id="vPlaca" placeholder="1234-ABC" autocomplete="off"></label>
+    <label>Responsable<input id="vResp" placeholder="Nombre completo" autocomplete="off"></label>
+    <label>Teléfono<input id="vTel" type="tel" placeholder="7xxxxxxx" autocomplete="off"></label>
+    <div class="dos">
+      <label>Ancho de ruta (m)<input id="vAncho" type="number" min="10" value="40"></label>
+      <label>Tiempo para volver (s)<input id="vGracia" type="number" min="10" value="120"></label>
+    </div>
+    <div class="botones">
+      <button id="trazar" type="button" class="sec">Trazar ruta en el mapa</button>
+      <button id="deshacer" type="button" class="sec">Deshacer punto</button>
+      <button id="borrar" type="button" class="sec">Borrar ruta</button>
+      <button id="nuevo" type="button" class="sec">Nuevo</button>
+    </div>
+    <button id="guardar" type="button" class="principal">Guardar vehículo y ruta</button>
+    <p id="aviso" class="nota" role="status"></p>
+  </section>
+
+  <section>
+    <h2>Alertas recientes</h2>
+    <div id="alertas" class="lista"><p class="nota">Sin alertas.</p></div>
+  </section>
+</aside>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
